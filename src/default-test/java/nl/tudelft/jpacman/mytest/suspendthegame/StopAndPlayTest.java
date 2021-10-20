@@ -1,4 +1,4 @@
-package nl.tudelft.jpacman.mytest;
+package nl.tudelft.jpacman.mytest.suspendthegame;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.board.Direction;
@@ -75,7 +75,7 @@ public class StopAndPlayTest {
         move(game, Direction.NORTH, 2);
         Thread.sleep(6000L);
 
-        //ํYou Died
+        //You Died;
 
         game.stop();
         assertThat(game.isInProgress()).isFalse();

@@ -1,4 +1,4 @@
-package nl.tudelft.jpacman.mytest;
+package nl.tudelft.jpacman.mytest.score;
 import static nl.tudelft.jpacman.LauncherSmokeTest.move;
 import static nl.tudelft.jpacman.ui.ScorePanel.DEFAULT_SCORE_FORMATTER;
 import static org.assertj.core.api.Assertions.assertThat;

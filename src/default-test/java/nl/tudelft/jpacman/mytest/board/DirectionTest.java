@@ -1,7 +1,8 @@
-package nl.tudelft.jpacman.board;
+package nl.tudelft.jpacman.mytest.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import nl.tudelft.jpacman.board.Direction;
 import org.junit.jupiter.api.Test;
 
 public class DirectionTest {

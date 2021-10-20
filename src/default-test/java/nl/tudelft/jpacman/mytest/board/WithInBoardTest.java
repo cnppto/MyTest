@@ -1,5 +1,8 @@
-package nl.tudelft.jpacman.board;
+package nl.tudelft.jpacman.mytest.board;
 
+
+import nl.tudelft.jpacman.board.Board;
+import nl.tudelft.jpacman.board.Square;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,6 +16,7 @@ public class WithInBoardTest {
         { mock(Square.class), mock(Square.class) },
         { mock(Square.class), mock(Square.class) },
     };
+
     private final Board board = new Board(grid);
 
     // Check that the square is within the board (on-point)
@@ -45,5 +49,6 @@ public class WithInBoardTest {
     void testOutOfBoard(int x, int y) {
         assertThat(board.withinBorders(x, y)).isFalse();
     }
+
 
 }

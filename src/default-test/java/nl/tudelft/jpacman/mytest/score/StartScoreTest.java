@@ -1,4 +1,4 @@
-package nl.tudelft.jpacman.G8_test;
+package nl.tudelft.jpacman.mytest.score;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.game.Game;

@@ -1,4 +1,4 @@
-package nl.tudelft.jpacman.mytest;
+package nl.tudelft.jpacman.mytest.movetheplayer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

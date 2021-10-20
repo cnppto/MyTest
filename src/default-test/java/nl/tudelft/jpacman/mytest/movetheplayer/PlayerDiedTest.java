@@ -1,4 +1,4 @@
-package nl.tudelft.jpacman.movetheplayer;
+package nl.tudelft.jpacman.mytest.movetheplayer;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.board.Direction;
