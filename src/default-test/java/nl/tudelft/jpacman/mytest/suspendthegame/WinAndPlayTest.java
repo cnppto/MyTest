@@ -271,7 +271,13 @@ public class WinAndPlayTest {
         Thread.sleep(1000L);
 
         getGame().start(); // can't replay
+        
+        
         assertThat(getGame().isInProgress()).isFalse();
+        
+        
+        //want to replay but fail
+        //assertThat(getGame().isInProgress()).isTrue();
 
     }
 
