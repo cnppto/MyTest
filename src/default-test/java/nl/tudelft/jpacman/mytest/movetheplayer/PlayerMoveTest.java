@@ -74,6 +74,10 @@ public class PlayerMoveTest {
             game.move(player, dir);
         }
     }
+    private Game getGame() {
+        return launcher.getGame();
+
+    }
 }
 
 
