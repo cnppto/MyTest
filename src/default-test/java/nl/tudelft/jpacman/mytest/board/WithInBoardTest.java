@@ -17,7 +17,7 @@ public class WithInBoardTest {
         { mock(Square.class), mock(Square.class) },
     };
 
-    Board board = new Board(grid);
+    public final Board board =new Board(grid);
 
     // Check that the square is within the board (on-point)
     // x Horizontal coordinateof relevant cell.

@@ -1,50 +1,52 @@
-package nl.tudelft.jpacman.mytest.suspendthegame;
+package nl.tudelft.jpacman.mytest.score;
+import static nl.tudelft.jpacman.LauncherSmokeTest.move;
+import static nl.tudelft.jpacman.ui.ScorePanel.DEFAULT_SCORE_FORMATTER;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.board.Direction;
 import nl.tudelft.jpacman.game.Game;
-import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Player;
+import nl.tudelft.jpacman.ui.ScorePanel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class StopAndPlayTest {
+public class PointIsTenTest {
     private Launcher launcher;
-    private Level level;
+
     /**
-     * Start a launcher, which can display the user interface.
+     * Launch the user interface.
      */
     @BeforeEach
-    public void before() {
+    void setUpPacman() {
         launcher = new Launcher();
+        launcher.launch();
     }
 
     /**
-     * Close the user interface.
+     * Quit the user interface when we're done.
      */
     @AfterEach
-    public void after() {
+    void tearDown() {
         launcher.dispose();
     }
 
-    /**
-     * The simplest test that just starts the
-     * game and checks it is indeed in progress.
-     */
     @Test
-    @DisplayName("player playing stopping  and play again")
-    public void gameCanPlayNStopNPlay()  throws InterruptedException  {
-        launcher.launch();
+        void pointisTen() throws InterruptedException {
         Game game = launcher.getGame();
         Player player = game.getPlayers().get(0);
 
+        // start cleanly.
+        // start is Zero
+        assertThat(game.isInProgress()).isFalse();
+        game.start();
+        assertThat(game.isInProgress()).isTrue();
+        assertThat(player.getScore()).isZero();
 
-        getGame().start();
         // get points
+        // points is Ten
         game.move(player, Direction.EAST);
         assertThat(player.getScore()).isEqualTo(10);
 
@@ -52,23 +54,13 @@ public class StopAndPlayTest {
         game.move(player, Direction.WEST);
         assertThat(player.getScore()).isEqualTo(10);
 
+        // calculate pellet plus Ten
+
         // try to move as far as we can
         move(game, Direction.EAST, 7);
         assertThat(player.getScore()).isEqualTo(60);
 
-        //assertThat(getGame().isInProgress()).isTrue();
-
-
-        getGame().stop();
-        assertThat(getGame().isInProgress()).isFalse();
-        Thread.sleep(2000L);
-
-        // plat again t013
-
-        getGame().start();
-        assertThat(getGame().isInProgress()).isTrue();
-
-        //move forward
+        // move towards the monsters
         move(game, Direction.NORTH, 6);
         assertThat(player.getScore()).isEqualTo(120);
 
@@ -77,14 +69,17 @@ public class StopAndPlayTest {
         assertThat(player.getScore()).isEqualTo(120);
 
         move(game, Direction.NORTH, 2);
-        Thread.sleep(6000L);
 
-        //You Died;
+        // Sleeping in tests is generally a bad idea.
+        // Here we do it just to let the monsters move.
+        Thread.sleep(500L);
 
-        game.stop();
-        assertThat(game.isInProgress()).isFalse();
+        String die = String.format("Score: 120");
+        final ScorePanel.ScoreFormatter s = DEFAULT_SCORE_FORMATTER;
+        assertEquals(die,s.format(player) );
 
     }
+
     public static void move(Game game, Direction dir, int numSteps) {
         Player player = game.getPlayers().get(0);
         for (int i = 0; i < numSteps; i++) {
@@ -92,10 +87,7 @@ public class StopAndPlayTest {
         }
     }
 
-
-
-    private Game getGame() {
-        return launcher.getGame();
     }
-}
+
+
 

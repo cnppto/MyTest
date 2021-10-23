@@ -7,6 +7,7 @@ import nl.tudelft.jpacman.level.Level;
 import nl.tudelft.jpacman.level.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,6 +36,7 @@ public class DiedAndPlayAgainTest {
      * game and checks it is indeed in progress.
      */
     @Test
+    @DisplayName("Die and Replay")
     public void gameCanPlayNStopNPlay()  throws InterruptedException  {
         launcher.launch();
         Game game = launcher.getGame();
@@ -88,9 +90,10 @@ public class DiedAndPlayAgainTest {
 
 
         game.start();//Can't replay
-        assertThat(game.isInProgress()).isFalse();
+        //assertThat(game.isInProgress()).isFalse();
+
         //want to replay but fail
-        //assertThat(getGame().isInProgress()).isTrue();
+        assertThat(getGame().isInProgress()).isTrue();
 
 
         Thread.sleep(1000L);

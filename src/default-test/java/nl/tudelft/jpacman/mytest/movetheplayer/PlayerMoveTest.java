@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerMoveTest {
@@ -46,6 +48,7 @@ public class PlayerMoveTest {
         Thread.sleep(1000);
 
     }
+
     @Test
     @DisplayName("Player Move To Empty Square Test")
     void playerMoveToEmptySquareTest() throws InterruptedException {
@@ -65,6 +68,23 @@ public class PlayerMoveTest {
 
         assertThat(playerSquare.getSquareAt(Direction.WEST)).isEqualTo(newPlayerSquare);
         assertThat(player.getScore()).isEqualTo(score);
+
+    }
+
+    @Test
+    @DisplayName("Player Move Fails")
+    void PlayerMoveFailsTest() throws InterruptedException {
+        launcher.launch();
+
+        players = getGame().getPlayers();
+        Player player = players.get(0);
+
+        assertThat(getGame().isInProgress()).isFalse();
+        getGame().start();
+        // get points
+        move(getGame(), Direction.NORTH, 1);
+        assertThat(player.getScore()).isEqualTo(0);
+        Thread.sleep(4000);
 
     }
 

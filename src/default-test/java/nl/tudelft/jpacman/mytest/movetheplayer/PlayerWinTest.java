@@ -1,4 +1,6 @@
-package nl.tudelft.jpacman.mytest.suspendthegame;
+package nl.tudelft.jpacman.mytest.movetheplayer;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.board.Direction;
@@ -9,9 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinAndPlayTest {
+
+public class PlayerWinTest {
+
     private Launcher launcher;
 
     /**
@@ -32,7 +35,7 @@ public class WinAndPlayTest {
     }
 
     @Test
-    @DisplayName("Win and Replay")
+    @DisplayName("Player Move To Win")
     void tryToWin() throws InterruptedException {
 
 
@@ -272,14 +275,7 @@ public class WinAndPlayTest {
         assertThat(player.isAlive()).isTrue();
         Thread.sleep(1000L);
 
-        getGame().start(); // can't replay
-        
-        
-        //assertThat(getGame().isInProgress()).isFalse();
-        
-        
-        //want to replay but fail
-        assertThat(getGame().isInProgress()).isTrue();
+
 
     }
 
