@@ -36,6 +36,6 @@ public class StartScoreTest {
         game.start();
         //assertThat(game.isInProgress()).isTrue();
         assertThat(player.getScore()).isZero();
-        Thread.sleep(6000);
+        Thread.sleep(4000);
     }
 }
