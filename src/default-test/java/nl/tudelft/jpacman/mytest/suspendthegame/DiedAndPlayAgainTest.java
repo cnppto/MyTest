@@ -89,6 +89,8 @@ public class DiedAndPlayAgainTest {
 
         game.start();//Can't replay
         assertThat(game.isInProgress()).isFalse();
+        //want to replay but fail
+        //assertThat(getGame().isInProgress()).isTrue();
 
 
         Thread.sleep(1000L);
