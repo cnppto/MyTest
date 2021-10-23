@@ -2,6 +2,7 @@ package nl.tudelft.jpacman.mytest.movetheplayer;
 
 import nl.tudelft.jpacman.Launcher;
 import nl.tudelft.jpacman.board.Direction;
+import nl.tudelft.jpacman.board.Square;
 import nl.tudelft.jpacman.game.Game;
 import nl.tudelft.jpacman.level.Player;
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PlayerMoveTest {
 
     private Launcher launcher;
+    private List<Player> players;
 
     @BeforeEach
     void setUpPacman() {
@@ -25,46 +27,44 @@ public class PlayerMoveTest {
         launcher.dispose();
     }
 
-    @Test
+@Test
     @DisplayName("Player Move And Eat Point Test")
     void playerMoveAndPointTest() throws InterruptedException {
-        Game game = launcher.getGame();
-        Player player = game.getPlayers().get(0);
+        launcher.launch();
+        getGame().start();
+        players = getGame().getPlayers();
+        Player player = players.get(0);
         // start cleanly.
-        game.start();
-        assertThat(game.isInProgress()).isTrue();
+
+        assertThat(getGame().isInProgress()).isTrue();
         assertThat(player.getScore()).isZero();
         // get points
         Thread.sleep(1000);
-        move(game, Direction.WEST, 4);
+        move(getGame(), Direction.WEST, 4);
         //Thread.sleep(1000);
         assertThat(player.getScore()).isEqualTo(40);
         Thread.sleep(1000);
 
     }
     @Test
-    @DisplayName("Player Move And Don't Eat Point Test")
-    void playerMoveAndNoPointTest() throws InterruptedException {
-        Game game = launcher.getGame();
-        Player player = game.getPlayers().get(0);
-        // start cleanly.
-        assertThat(game.isInProgress()).isFalse();
-        game.start();
-        assertThat(game.isInProgress()).isTrue();
-        assertThat(player.getScore()).isZero();
-        // get points
+    @DisplayName("Player Move To Empty Square Test")
+    void playerMoveToEmptySquareTest() throws InterruptedException {
+        launcher.launch();
+        getGame().start();
+        players = getGame().getPlayers();
+        Player player = players.get(0);
         Thread.sleep(1000);
-        move(game, Direction.EAST, 4);
-        //Thread.sleep(1000);
-        assertThat(player.getScore()).isEqualTo(40);
-        //no more points to earn here.
-        Thread.sleep(1000);
-        move(game, Direction.WEST, 2);
-        Thread.sleep(1000);
+        getGame().move(player, Direction.EAST); //Move the player to the east.
+        int score = player.getScore();
 
-        assertThat(player.getScore()).isEqualTo(40);
+        Square playerSquare = player.getSquare();
+        assertThat(playerSquare.getSquareAt(Direction.WEST).getOccupants()).isEmpty(); // Check if the square on the west if empty.
 
-        Thread.sleep(1000);
+        getGame().move(player, Direction.WEST); //Move to the empty square
+        Square newPlayerSquare = player.getSquare();
+
+        assertThat(playerSquare.getSquareAt(Direction.WEST)).isEqualTo(newPlayerSquare);
+        assertThat(player.getScore()).isEqualTo(score);
 
     }
 
